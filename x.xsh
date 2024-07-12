@@ -93,7 +93,7 @@ def __edit_program(args):
 
 @__add_function('add bin script')
 def __add_bin_script(args):
-    code -r D:\minieyes_chen\software\bin\@(input('script name: '))
+    code -r D:\minieyes\software\bin\@(input('script name: '))
 
 @__add_function('add bookmark')
 def __add_bookmark(args):
@@ -112,72 +112,10 @@ def __goto_program_folder(args):
     import pathlib
     cd @(__fzf_select(str(v) for v in pathlib.Path('D:/minieyes_chen/program').iterdir() if v.is_dir()))
 
-@__add_function('set proxy')
-def __set_proxy(args):
-    import getpass
-    password = getpass.getpass('NVT Password: ')
-    $HTTP_PROXY = f'http://nvt02863:{password}@172.20.254.218:8080'
-    $HTTPS_PROXY = f'http://nvt02863:{password}@172.20.254.218:8080'
-    npm config set proxy $HTTP_PROXY
-    npm config set https-proxy $HTTPS_PROXY
-
-@__add_function('remove proxy')
-def __remove_proxy(args):
-    del $HTTP_PROXY
-    del $HTTPS_PROXY
-    npm config delete proxy
-    npm config delete https-proxy
-
-@__add_function('new repo')
-def __new_repo(args):
-    import pyperclip
-
-    RepoName = input('Repo Name: ')
-    RepoPath = f'I:/IMAGE/MD/TL1_Private/Software/minieyes/repo/{RepoName}.git'
-    mkdir @(RepoPath)
-    cd @(RepoPath)
-    git init --bare
-
-    print('Repo Path Copied to Clipboard')
-    pyperclip.copy(RepoPath)
-
-    cd -
-
-@__add_function('select SA')
-def __select_SA(args):
-    from miniLibrary.miniDB import miniDB
-    with miniDB('fpga_management_db') as db:
-        rows = list(db.query('Select * from `salist`'))
-        for row in rows: row['fullname'] = '{}({})'.format(row['en_name'], row['ch_name'])
-        name = __fzf_select(row['fullname'] for row in rows)
-        print([row for row in rows if row['fullname'] == name])
-
-@__add_function('skype SA')
-def __skype_SA(args):
-    import os
-    from miniLibrary.miniDB import miniDB
-    with miniDB('fpga_management_db') as db:
-        rows = list(db.query('Select * from `salist`'))
-        for row in rows: row['fullname'] = '{}({})'.format(row['en_name'], row['ch_name'])
-        name = __fzf_select(row['fullname'] for row in rows)
-        for row in rows:
-            if row['fullname'] == name:
-                os.startfile('sip:{}'.format(row['email']))
-
 @__add_function('show stock')
 def __show_stock(args):
     import os
     os.startfile('https://statementdog.com/analysis/{}/long-term-and-short-term-monthly-revenue-yoy'.format(input('Stock ID: ')))
-
-@__add_function('search my104')
-def __search_my104(args):
-    import os
-    os.startfile('C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', arguments='http://oawf1.novatek.com.tw/eform/104/Dialogs/Dialog01.aspx?Key={}'.format(input('Search Text: ')))
-
-@__add_function('install pip')
-def __install_pip(args):
-    import subprocess
-    subprocess.run('py -m pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org {}'.format(input('Module Name: ')), shell=True)
 
 @__add_function('search dictionary')
 def __search_dictionary(args):
@@ -191,11 +129,6 @@ def __search_dictionary(args):
 def __set_vifm_location(args):
     import os
     vifm --server-name vifm --remote +@('cd ' + os.getcwd().replace('\\','/'))
-
-@__add_function('get git recent log')
-def __get_git_recent_log(args):
-    from datetime import datetime, timedelta
-    git log --reverse --pretty=format:'%h - %ad : %s' --date=format:'%Y-%m-%d %H:%M:%S' --since @(datetime.now() + timedelta(int(input('Trace Back Days: '))))
 
 @__add_function('show cursor position')
 def __show_cursor_position(args):
@@ -213,10 +146,9 @@ def __show_cursor_position(args):
     running = False
     mythread.join()
 
-#     }
-#     "change folder permissions"  = { cmd /c takeown /F %1 /R /D Y; cmd /c icacls %1 /grant:r (Read-Host 'User Acount'):F /T }
-# }
-# $commands["get employee"] = $commands["select SA"]
+@__add_function('change folder permissions')
+def __change_folder_permissions(args):
+    cmd /c takeown /F %1 /R /D Y; cmd /c icacls %1 /grant:r @(input('User Acount: ')):F /T
 
 def _x(args):
     if len(args):
