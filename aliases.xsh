@@ -1,0 +1,1 @@
+aliases['lg'] = 'lazygit.exe'
