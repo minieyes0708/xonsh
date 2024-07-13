@@ -157,7 +157,7 @@ def __change_folder_permissions(args):
 
 @__add_function('fzf select es file')
 def __fzf_select_es_file(args):
-    print(repr(__es_select(args).strip()), end='')
+    print(__es_select(args).strip(), end='')
 
 def __x(args):
     if len(args):
