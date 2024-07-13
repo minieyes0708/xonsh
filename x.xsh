@@ -17,6 +17,11 @@ def __fzf_select(values):
     fzf_proc = subprocess.run(['fzf', '--height=40%', '--reverse'], input='\n'.join(values).encode('utf8'), stdout=subprocess.PIPE)
     return fzf_proc.stdout.rstrip().decode('utf8')
 
+def __clip(args, stdin=None):
+    import pyperclip
+    pyperclip.copy(stdin.read())
+aliases['clip'] = __clip
+
 @__add_function('git log')
 def __git_log(args):
     TortoiseGitProc.exe -path . -command log&
