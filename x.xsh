@@ -155,12 +155,17 @@ def __show_cursor_position(args):
 def __change_folder_permissions(args):
     cmd /c takeown /F %1 /R /D Y; cmd /c icacls %1 /grant:r @(input('User Acount: ')):F /T
 
-def _x(args):
+@__add_function('fzf select es file')
+def __fzf_select_es_file(args):
+    print(repr(__es_select(args).strip()), end='')
+
+def __x(args):
     if len(args):
         if   args[0] == 'p':        __functions['run program'](args)
         elif args[0] == 'sf':       __functions['start file'](args)
         elif args[0] == 'gb':       __functions['goto bookmark'](args)
         elif args[0] == 'cd':       __functions['goto subdirectory'](args)
+        elif args[0] == 'es':       __functions['fzf select es file'](args[1:])
         elif args[0] == 'gpr':      __functions['goto program folder'](args)
         elif args[0] == 'spr':      __functions['start file'](args[1:] + ['-path', 'D:/minieyes_chen/program'])
         elif args[0] == 'dict':     __functions['search dictionary'](args)
@@ -170,4 +175,4 @@ def _x(args):
     else:
         selection = __fzf_select(__functions.keys())
         if selection: __functions[selection](args)
-aliases['x'] = _x
+aliases['x'] = __x
