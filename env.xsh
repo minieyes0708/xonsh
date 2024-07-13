@@ -1,0 +1,1 @@
+$YAZI_FILE_ONE = r'C:\Program Files\Git\usr\bin\file.exe'
