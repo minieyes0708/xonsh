@@ -191,3 +191,4 @@ aliases['xcd'] = __functions['goto subdirectory']
 aliases['gpr'] = __functions['goto program folder']
 aliases['spr'] = lambda args: __functions['start file'](args + ['-path', 'D:/minieyes/program'])
 aliases['dict'] = __functions['search dictionary']
+aliases['esfile'] = __functions['fzf select es file']
