@@ -166,3 +166,10 @@ def _x(args):
         selection = __fzf_select(__functions.keys())
         if selection: __functions[selection](args)
 aliases['x'] = _x
+aliases['p'] = __functions['run program']
+aliases['sf'] = __functions['start file']
+aliases['gb'] = __functions['goto bookmark']
+aliases['xcd'] = __functions['goto subdirectory']
+aliases['gpr'] = __functions['goto program folder']
+aliases['spr'] = lambda args: __functions['start file'](args + ['-path', 'D:/minieyes/program'])
+aliases['dict'] = __functions['search dictionary']
