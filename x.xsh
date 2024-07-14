@@ -119,10 +119,13 @@ def __show_stock(args):
 
 @__add_function('search dictionary')
 def __search_dictionary(args):
-    import requests
+    import os, requests
     from bs4 import BeautifulSoup
 
-    response = requests.get('https://tw.dictionary.search.yahoo.com/search?p={}'.format(input('Search Text: ')), proxies={'http': $HTTP_PROXY, 'https': $HTTPS_PROXY}, verify=False)
+    proxies = {}
+    if 'HTTP_PROXY' in os.environ: proxies['http'] = $HTTP_PROXY
+    if 'HTTPS_PROXY' in os.environ: proxies['https'] = $HTTPS_PROXY
+    response = requests.get('https://tw.dictionary.search.yahoo.com/search?p={}'.format(args[0]), proxies=proxies, verify=False)
     print(BeautifulSoup(response.content, 'html.parser').find('div', {'class': 'grp-main'}).get_text())
 
 @__add_function('set vifm location')
