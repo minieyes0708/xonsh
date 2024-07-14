@@ -183,7 +183,7 @@ def __x(args):
     else:
         selection = __fzf_select(__functions.keys())
         if selection: __functions[selection](args)
-aliases['x'] = _x
+aliases['x'] = __x
 aliases['p'] = __functions['run program']
 aliases['sf'] = __functions['start file']
 aliases['gb'] = __functions['goto bookmark']
