@@ -15,7 +15,7 @@ def __posh_right():
 def __random_prompt():
     import os, random
     THEME_FOLDER = p'$DotConfig/oh-my-posh/themes'
-    THEME_FILE = random.choice($(ls THEME_FOLDER).splitlines())
+    THEME_FILE = random.choice($(ls @(THEME_FOLDER)).splitlines())
     $POSH_THEME = os.path.join(THEME_FOLDER, THEME_FILE)
 
     $PROMPT = __posh_primary
@@ -25,7 +25,7 @@ aliases['random_prompt'] = __random_prompt
 def __select_prompt_theme():
     import os
     THEME_FOLDER = p'$DotConfig/oh-my-posh/themes'
-    THEME_FILE = $(ls THEME_FOLDER | fzf)
+    THEME_FILE = $(ls @(THEME_FOLDER) | fzf)
     if THEME_FILE:
         $POSH_THEME = os.path.join(THEME_FOLDER, THEME_FILE)
 
