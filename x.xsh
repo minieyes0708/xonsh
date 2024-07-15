@@ -94,8 +94,8 @@ def __start_file(args):
 
 @__add_function('run program')
 def __run_program(args):
-    import subprocess
-    subprocess.run(__fzf_select(line.strip() for line in open(p'$DotConfig/programs.txt').readlines()), shell=True)
+    import shlex
+    @(shlex.split(__fzf_select(line.strip() for line in open(p'$DotConfig/programs.txt').readlines())))&
 
 @__add_function('edit program')
 def __edit_program(args):
