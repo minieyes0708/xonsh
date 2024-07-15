@@ -167,6 +167,10 @@ def __change_folder_permissions(args):
 def __fzf_select_es_file(args):
     print(__es_select(args).strip(), end='')
 
+@__add_function('edit esfile with code')
+def __edit_esfile_with_code(args):
+    code -r @(__es_select(args).strip())
+
 def __x(args):
     if len(args):
         if   args[0] == 'p':        __functions['run program'](args)
@@ -192,3 +196,4 @@ aliases['gpr'] = __functions['goto program folder']
 aliases['spr'] = lambda args: __functions['start file'](args + ['-path', 'D:/minieyes/program'])
 aliases['dict'] = __functions['search dictionary']
 aliases['esfile'] = __functions['fzf select es file']
+aliases['escode'] = __functions['edit esfile with code']
