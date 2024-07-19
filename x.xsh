@@ -101,6 +101,10 @@ def __run_program(args):
 def __edit_program(args):
     code -r $DotConfig/programs.txt
 
+@__add_function('edit yazi command palette')
+def __edit_program(args):
+    code -r $DotConfig/yazi_command_palette.txt
+
 @__add_function('add bin script')
 def __add_bin_script(args):
     code -r D:\minieyes\software\bin\@(input('script name: '))
