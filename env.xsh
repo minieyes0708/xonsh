@@ -1,9 +1,9 @@
-for p in reversed([
+for p in (
     r'C:\Program Files\7-Zip',
     r'C:\Program Files\Git\usr\bin'
-]):
+):
     if p not in $PATH:
-        $PATH.insert(0, p)
+        $PATH.append(p)
 $FZF_DEFAULT_OPTS = r'--height=40% --reverse'
 $YAZI_FILE_ONE = r'C:\Program Files\Git\usr\bin\file.exe'
 
