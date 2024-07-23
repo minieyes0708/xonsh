@@ -1,3 +1,5 @@
+import subprocess
+
 __functions = dict()
 
 def __add_function(key):
@@ -6,21 +8,23 @@ def __add_function(key):
     return inner
 
 def __es_select(args):
-    import subprocess
     es_proc = subprocess.Popen(['es'] + args, stdout=subprocess.PIPE)
     fzf_proc = subprocess.Popen(['fzf', '--height=40%', '--reverse'], stdin=es_proc.stdout, stdout=subprocess.PIPE)
     fzf_proc.wait()
     return fzf_proc.stdout.read().rstrip().decode('utf8')
 
 def __fzf_select(values):
-    import subprocess
     fzf_proc = subprocess.run(['fzf', '--height=40%', '--reverse'], input='\n'.join(values).encode('utf8'), stdout=subprocess.PIPE)
     return fzf_proc.stdout.rstrip().decode('utf8')
 
-def __start(args):
-    import subprocess
-    subprocess.run(args, shell=True)
-aliases['start'] = __start
+def map_to_cmd(cmd):
+    def inner(args, stdin=None, stdout=None, stderr=None):
+        proc = subprocess.Popen(['cmd', '/c', cmd] + args, shell=True, stdin=stdin, stdout=stdout, stderr=stderr)
+        proc.wait()
+        return 0
+    return inner
+for cmd in ('start',):
+    aliases[cmd] = map_to_cmd(cmd)
 
 def __clip(args, stdin=None):
     import pyperclip
