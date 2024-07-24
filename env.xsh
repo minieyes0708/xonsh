@@ -7,6 +7,7 @@ for __path in (
 $FZF_DEFAULT_OPTS = r'--height=40% --reverse'
 $YAZI_FILE_ONE = r'C:\Program Files\Git\usr\bin\file.exe'
 
+$LC_ALL = 'zh_TW.BIG5'
 $XONSH_AUTOPAIR = True
 $XONSH_STORE_STDOUT = True
 $XONSH_SHOW_TRACEBACK = True
