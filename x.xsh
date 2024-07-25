@@ -17,14 +17,8 @@ def __fzf_select(values):
     fzf_proc = subprocess.run(['fzf', '--height=40%', '--reverse'], input='\n'.join(values).encode('utf8'), stdout=subprocess.PIPE)
     return fzf_proc.stdout.rstrip().decode('utf8')
 
-def map_to_cmd(cmd):
-    def inner(args, stdin=None, stdout=None, stderr=None):
-        proc = subprocess.Popen(['cmd', '/c', cmd] + args, shell=True, stdin=stdin, stdout=stdout, stderr=stderr)
-        proc.wait()
-        return 0
-    return inner
 for cmd in ('start',):
-    aliases[cmd] = map_to_cmd(cmd)
+    aliases[cmd] = ['cmd', '/c', cmd]
 
 def __clip(args, stdin=None):
     import pyperclip
