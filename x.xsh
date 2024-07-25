@@ -19,6 +19,7 @@ def __fzf_select(values):
 
 for cmd in ('start',):
     aliases[cmd] = ['cmd', '/c', cmd]
+del cmd
 
 def __clip(args, stdin=None):
     import pyperclip
