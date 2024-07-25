@@ -14,7 +14,7 @@ def __posh_right():
 
 def __random_prompt():
     import os, random
-    THEME_FOLDER = p'$DotConfig/oh-my-posh/themes'
+    THEME_FOLDER = p'$PROGRAM_PATH/oh-my-posh/themes'
     THEME_FILE = random.choice($(ls @(THEME_FOLDER)).splitlines())
     $POSH_THEME = os.path.join(THEME_FOLDER, THEME_FILE)
 
@@ -24,7 +24,7 @@ aliases['random_prompt'] = __random_prompt
 
 def __select_prompt_theme():
     import os
-    THEME_FOLDER = p'$DotConfig/oh-my-posh/themes'
+    THEME_FOLDER = p'$PROGRAM_PATH/oh-my-posh/themes'
     THEME_FILE = $(ls @(THEME_FOLDER) | fzf)
     if THEME_FILE:
         $POSH_THEME = os.path.join(THEME_FOLDER, THEME_FILE)
@@ -35,4 +35,4 @@ aliases['select_prompt_theme'] = __select_prompt_theme
 
 $PROMPT = __posh_primary
 $RIGHT_PROMPT = __posh_right
-$POSH_THEME = p'$DotConfig/oh-my-posh/themes/catppuccin_frappe.omp.json'
+$POSH_THEME = p'$PROGRAM_PATH/oh-my-posh/themes/catppuccin_frappe.omp.json'
