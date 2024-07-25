@@ -96,7 +96,7 @@ def __run_program(args):
     import shlex
     command = __fzf_select(line.strip() for line in open(p'$DotConfig/programs.txt').readlines())
     if not command: return
-    @(shlex.split(command))&
+    @(shlex.split(command))
 
 @__add_function('edit program')
 def __edit_program(args):
