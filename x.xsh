@@ -1,10 +1,12 @@
 import subprocess
+from xonsh.tools import unthreadable
 
 __functions = dict()
 
 def __add_function(key):
     def inner(func):
         __functions[key] = func
+        return func
     return inner
 
 def __es_select(args):
@@ -91,6 +93,7 @@ def __start_file(args):
     import os
     os.startfile(__es_select(args))
 
+@unthreadable
 @__add_function('run program')
 def __run_program(args):
     import shlex
